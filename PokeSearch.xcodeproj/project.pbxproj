@@ -20,6 +20,7 @@
 		872689151DA5EA5C00820B10 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8726890F1DA5EA5C00820B10 /* GFGeoHashQuery.m */; };
 		872689161DA5EA5C00820B10 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 872689111DA5EA5C00820B10 /* GFQuery.m */; };
 		8726891B1DA6024A00820B10 /* PokeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726891A1DA6024A00820B10 /* PokeAnnotation.swift */; };
+		87F1AE761DA8397100E607CF /* ChoosePokemonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F1AE751DA8397100E607CF /* ChoosePokemonVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		872689111DA5EA5C00820B10 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		872689171DA5EC4000820B10 /* PokeSearch-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PokeSearch-Bridging-Header.h"; sourceTree = "<group>"; };
 		8726891A1DA6024A00820B10 /* PokeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeAnnotation.swift; sourceTree = "<group>"; };
+		87F1AE751DA8397100E607CF /* ChoosePokemonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoosePokemonVC.swift; sourceTree = "<group>"; };
 		B2DE598F52FBD53D3D352F9D /* Pods-PokeSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokeSearch/Pods-PokeSearch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				872688EE1DA5E6FF00820B10 /* ViewController.swift */,
+				87F1AE751DA8397100E607CF /* ChoosePokemonVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				872689121DA5EA5C00820B10 /* GeoFire.m in Sources */,
 				872689151DA5EA5C00820B10 /* GFGeoHashQuery.m in Sources */,
 				872689161DA5EA5C00820B10 /* GFQuery.m in Sources */,
+				87F1AE761DA8397100E607CF /* ChoosePokemonVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
