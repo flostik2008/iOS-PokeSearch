@@ -79,26 +79,26 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KQd-5s-Mdh">
                                 <frame key="frameInset" minX="8" minY="116" width="358" height="538"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IjQ-gv-ZJl">
-                                    <size key="itemSize" width="126" height="126"/>
+                                    <size key="itemSize" width="126" height="131"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokeCell" id="RBS-1b-eNB">
-                                        <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PokeCell" id="RBS-1b-eNB" customClass="PokeCell" customModule="PokeSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="126" height="131"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="126" height="131"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="0qB-7a-YOP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0qB-7a-YOP">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="97" id="eFo-rC-spv"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bulbasaur" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMi-Td-Z6D">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMi-Td-Z6D">
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -115,7 +115,11 @@
                                             <constraint firstItem="0qB-7a-YOP" firstAttribute="top" secondItem="RBS-1b-eNB" secondAttribute="top" id="ZfG-kL-gJg"/>
                                             <constraint firstItem="0qB-7a-YOP" firstAttribute="leading" secondItem="cMi-Td-Z6D" secondAttribute="leading" id="hDd-Nt-PNE"/>
                                         </constraints>
-                                        <size key="customSize" width="126" height="126"/>
+                                        <size key="customSize" width="126" height="131"/>
+                                        <connections>
+                                            <outlet property="pokeImg" destination="0qB-7a-YOP" id="DSb-11-ruM"/>
+                                            <outlet property="pokeLbl" destination="cMi-Td-Z6D" id="nNt-tb-Grl"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -149,7 +153,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="120" height="120"/>
         <image name="bg" width="1920" height="1200"/>
         <image name="pokeball" width="97" height="96"/>
     </resources>
