@@ -64,7 +64,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" searchBarStyle="minimal" text="" placeholder="Type Pokemon Name" translatesAutoresizingMaskIntoConstraints="NO" id="qZh-3V-eZF">
-                                <frame key="frameInset" minY="61" height="44"/>
+                                <frame key="frameInset" minY="61" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </searchBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="NBu-1t-X1n">
@@ -145,6 +145,7 @@
                     </view>
                     <connections>
                         <outlet property="collection" destination="KQd-5s-Mdh" id="3q5-86-fZu"/>
+                        <outlet property="searchBar" destination="qZh-3V-eZF" id="w73-Zm-AaA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rE-DD-Hf4" userLabel="First Responder" sceneMemberID="firstResponder"/>

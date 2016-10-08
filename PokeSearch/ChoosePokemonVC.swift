@@ -12,6 +12,8 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
     @IBOutlet weak var collection: UICollectionView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var pokemons = [Pokemon]()
     var filteredPokemons = [Pokemon]()
     var inSearchMode = false
@@ -23,7 +25,12 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
         
         collection.delegate = self
         collection.dataSource = self
+        searchBar.delegate = self
+        
         populatingArray()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         
     }
 
@@ -50,6 +57,9 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        if inSearchMode {
+            return filteredPokemons.count
+        }
         return pokemon.count
     }
     
@@ -59,18 +69,20 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
             
             var poke: Pokemon!
             
-            if inSearchMode == false {
-                poke = pokemons[indexPath.row]
+            if inSearchMode {
+            
+                poke = filteredPokemons[indexPath.row]
                 cell.configureCell(pokemon: poke)
             } else {
-//                poke = filteredPokemons[indexPath.row]
-//                cell.configureCell(pokemon: poke)
+                poke = pokemons[indexPath.row]
+                cell.configureCell(pokemon: poke)
             }
         
             return cell
-        }
+        } else {
         
-        return UICollectionViewCell()
+            return UICollectionViewCell() }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -78,13 +90,28 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        
+        view.endEditing(true)
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            collection.reloadData()
+            view.endEditing(true)
+        } else {
+            
+            inSearchMode = true
+            let lower = searchBar.text!.lowercased()
+            filteredPokemons = pokemons.filter({$0.name.range(of: lower) != nil })
+            collection.reloadData()
+        }
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }
 
