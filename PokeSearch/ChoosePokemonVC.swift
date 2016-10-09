@@ -8,15 +8,16 @@
 
 import UIKit
 
-class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
+class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate  {
 
     @IBOutlet weak var collection: UICollectionView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     var pokemons = [Pokemon]()
     var filteredPokemons = [Pokemon]()
     var inSearchMode = false
+    var loc: CLLocation!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +29,11 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
         searchBar.delegate = self
         
         populatingArray()
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
+
         
     }
-
+    
+ 
     func populatingArray()  {
         
         var poke: Pokemon!
@@ -87,11 +87,25 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        var poke: Pokemon!
+        
+        if inSearchMode {
+            
+            poke = filteredPokemons[indexPath.row]
+
+        } else {
+        
+            poke = pokemons[indexPath.row]
+        }
+        
+        print(poke.pokemonId)
+        
+        performSegue(withIdentifier: "PokeChosen", sender: poke)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
         view.endEditing(true)
-
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -110,9 +124,29 @@ class ChoosePokemonVC: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+ 
         view.endEditing(true)
     }
+    
+    @IBAction func backBtn(_ sender: AnyObject) {
+   
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokeChosen" {
+            if let mainVC = segue.destination as? ViewController {
+                if let poke = sender as? Pokemon {
+                    
+                    mainVC.poke = poke
+                    mainVC.loc = loc
+                                        
+                }
+            }
+        }
+    }
+    
 }
 
 

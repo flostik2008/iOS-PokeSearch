@@ -71,9 +71,26 @@
                                 <frame key="frameInset" minY="105" width="375" height="562"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivT-21-YDZ">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAO-ud-rL7">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="8HI-3C-PGh"/>
+                                            <constraint firstAttribute="width" constant="67" id="TLn-Sw-cKb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backBtn:" destination="O0v-fh-PCW" eventType="touchUpInside" id="Ddx-SX-u8i"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.40784313725490196" green="0.73725490196078436" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="cAO-ud-rL7" firstAttribute="leading" secondItem="ivT-21-YDZ" secondAttribute="leading" constant="8" id="Nli-dT-uif"/>
                                     <constraint firstAttribute="height" constant="61" id="xDH-WO-3w2"/>
+                                    <constraint firstAttribute="bottom" secondItem="cAO-ud-rL7" secondAttribute="bottom" constant="8" id="xd4-IU-n5C"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KQd-5s-Mdh">
@@ -146,6 +163,7 @@
                     <connections>
                         <outlet property="collection" destination="KQd-5s-Mdh" id="3q5-86-fZu"/>
                         <outlet property="searchBar" destination="qZh-3V-eZF" id="w73-Zm-AaA"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="PokeChosen" id="mJW-a5-3Fn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rE-DD-Hf4" userLabel="First Responder" sceneMemberID="firstResponder"/>

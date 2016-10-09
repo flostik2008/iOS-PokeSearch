@@ -31,7 +31,31 @@ SO answer: \
 Bug: smth with array names. the first item "bulbasaur" is being cut.\
 Solved. \
 \
-5. \
+5. Create "back" button. \
+Done. \
+\
+6. Pass the pokemon object to the first VC. \
+Done. \
+\
+7. when view appears, it loads animated again. \
+Doesn't throw a pokemon image there. \
+Where animation happens? \
+- in centerMapOnLocation\
+(will deal with this latter, instead - print a poke image)\
+\
+Now we should work with "showSightingsOnMap"\
+They appear but all in the center of the map, becuase our location becomes 0 after transitions. For that reason we will pass the value of loc from VC to VC. \
+Passing the loc back and forth worked! \
+\
+8. centerMapOnLocation\
+didUpdateUserLocation\
+Both work fine. Problem is in locationAuthStatus that is being load right in viewDidAppear. \
+Inside, there is mapView.showsUserLocation \
+that centers the map back to the user. \
+\
+can we call locationAuthStatus in viewDIdLoad? \
+\
+\
 \
 \
  }

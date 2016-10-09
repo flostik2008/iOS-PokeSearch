@@ -20,6 +20,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var geoFire:GeoFire!
     var geoFireRef: FIRDatabaseReference!
     
+    var poke: Pokemon!
+    var loc: CLLocation!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +34,35 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         geoFireRef = FIRDatabase.database().reference()
         geoFire = GeoFire(firebaseRef: geoFireRef)
         
-        
+//        locationAuthStatus()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         locationAuthStatus()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+       
+        if poke != nil {
+            
+            mapHasCenteredOnce = true
+            createSighting(forLocation: loc, withPokemon: poke.pokemonId)
+            
+            centerMapOnLocation(location: loc, animated: false)
+        }
+    }
+    
+    
     func locationAuthStatus () {
+       
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true
+            
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
+        
         
     }
     
@@ -53,16 +72,25 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    func centerMapOnLocation (location: CLLocation) {
+    func centerMapOnLocation (location: CLLocation, animated: Bool) {
+        
+        if animated == true {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
         mapView.setRegion(coordinateRegion, animated: true)
-        
+        } else if animated == false {
+            
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
+            
+            print(loc.coordinate)
+            
+            mapView.setRegion(coordinateRegion, animated: false)
+        }
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         if let loc = userLocation.location {
             if !mapHasCenteredOnce {
-                centerMapOnLocation(location: loc)
+                centerMapOnLocation(location: loc, animated: true)
                 mapHasCenteredOnce = true
             }
             
@@ -101,16 +129,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     
-    func createSighting(forLocation location: CLLocation, withPokemon pokeId: Int) {
-        geoFire.setLocation(location, forKey: "\(pokeId)")
+    func createSighting(forLocation location: CLLocation, withPokemon pokemonId: Int) {
         
-        
-        
+        geoFire.setLocation(location, forKey: "\(pokemonId)")
+        print("Sighting Created.")
     }
     
     func showSightingsOnMap(location: CLLocation) {
+        
         let circleQuery = geoFire!.query(at: location, withRadius: 2.5)
         _ = circleQuery?.observe(GFEventType.keyEntered, with: { (key, location) in
+            
             if let key = key, let location = location {
                let anno = PokeAnnotation(coordinate: location.coordinate, pokemonNumber: Int(key)!)
                 self.mapView.addAnnotation(anno)
@@ -153,16 +182,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func spotRandomPokemon(_ sender: AnyObject) {
+    
+        loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         
-        performSegue(withIdentifier: "ChoosePokemonVC", sender: self)
-        
-        
-//        let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-//        
-//        let rand = arc4random_uniform(150) + 1
-//        
-//        createSighting(forLocation: loc, withPokemon: Int(rand))
-
+        performSegue(withIdentifier: "ChoosePokemonVC", sender: loc)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChoosePokemonVC" {
+            if let choosePokeVC = segue.destination as? ChoosePokemonVC {
+                if let loc = sender as? CLLocation {
+                    
+                    choosePokeVC.loc = loc
+                }
+            }
+        }
     }
 
 }
